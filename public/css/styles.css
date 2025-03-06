@@ -95,7 +95,7 @@ footer p{
 }
 
 #hero > img {
-  width: 80%;
+  width: 500px;
   max-height: 400px;
   object-fit: contain;
 }
