@@ -209,7 +209,7 @@ footer p{
 .namePrice span {
   font-weight: bold;
   font-size: 1rem;
-  color: var(--light5-color);
+  color: var(--primary-color);
 }
 #inv-display hr {
   border: solid 3px;
