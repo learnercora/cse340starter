@@ -238,6 +238,77 @@ footer p{
 #inv-detail p:nth-child(even) {
   background: #f2f2f2;
 }
+.notice {
+  color: red;
+}
+/* login & register */
+.account-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.account-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 320px;
+}
+.account-card form {
+  text-align: left;
+}
+.account-card p {
+  text-align: center;
+}
+.account-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.account-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--light2-color);
+  border-radius: 5px;
+  font-size: 16px;
+}
+.account-form button {
+  background: var(--light5-color);
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.account-form button:hover {
+  background: var(--primary-color);
+}
+.account-card p {
+  margin-top: 1rem;
+  font-size: 14px;
+}
+.account-card a {
+  color: var(--light5-color);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.account-card a:hover {
+  text-decoration: underline;
+}
+#pswdBtn {
+  border: 2px solid #000;
+  border-radius: 5px;
+  padding: 2px;
+  margin-top: 1em;
+  font-size: small;
+  width: 10em;
+  text-align: center;
+}
 
 /* larger screen */
 @media screen and (min-width: 800px) {
