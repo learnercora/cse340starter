@@ -8,7 +8,13 @@
                 <input type="email" id="account_email" name="account_email" required>
     
                 <label for="account_password">Password:</label>
-                <input type="password" id="account_password" name="account_password" required>
+                <input type="password" id="account_password" name="account_password" required
+                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+                    title="Please match the requested format."
+                >
+                <div><i>＊There must be at least 12 characters, one must be a number, one must be a lowercase letter, one must be a capital letter, and one must be a non-alphanumeric character.</i></div>
+                
+                <span id="pswdBtn">Show Password</span>
     
                 <button type="submit">LOGIN</button>
             </form> 
@@ -16,3 +22,19 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    const pswdBtn = document.querySelector("#pswdBtn");
+    pswdBtn.addEventListener("click", function() {
+        const pwsdInput = document.getElementById("account_password");
+        const type = pwsdInput.getAttribute("type");
+        if (type === "password") {
+            pwsdInput.setAttribute("type","text");
+            pswdBtn.innerHTML = "Hide Password";
+        } else {
+            pwsdInput.setAttribute("type","password");
+            pswdBtn.innerHTML = "Show Password";
+        }
+    });
+</script>

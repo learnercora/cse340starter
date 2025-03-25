@@ -309,6 +309,13 @@ footer p{
   width: 10em;
   text-align: center;
 }
+input:required:invalid, input:focus:invalid {
+  background-color: rgb(255, 201, 201);
+ }
+input:required:valid {
+  background-color: rgb(192, 255, 192);
+}
+ 
 
 /* larger screen */
 @media screen and (min-width: 800px) {

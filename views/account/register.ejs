@@ -1,6 +1,13 @@
 <div class="register">
     <h1><%= title %></h1>
     <%- messages() %>
+    <% if (errors) { %>
+        <ul class="notice">
+       <% errors.array().forEach(error => { %>
+         <li><%= error.msg %></li>
+      <%  }) %>
+       </ul>
+      <% } %>
     <div class="account-container">
         <div class="account-card">
             <form class="account-form" name="register-form" action="/account/register" method="post">
@@ -17,9 +24,11 @@
     
                 <label for="account_password">Password:</label>
                 <input type="password" id="account_password" name="account_password" required
-                    pattern="(?=.*\d)(?=.*[A-Z])(?=.*\W).{12,}" 
-                    title="Password must be at least 12 characters long, contain at least 1 capital letter, 1 number, and 1 special character."
+                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+                    title="Please match the requested format."
                 >
+                <div><i>＊There must be at least 12 characters, one must be a number, one must be a lowercase letter, one must be a capital letter, and one must be a non-alphanumeric character.</i></div>
+                
                 <span id="pswdBtn">Show Password</span>
     
                 <button type="submit">Register</button>
