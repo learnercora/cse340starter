@@ -1,0 +1,23 @@
+<h1><%= title %></h1>
+<%- messages() %>
+<% if (errors) { %>
+<ul class="notice">
+<% errors.array().forEach(error => { %>
+    <li><%= error.msg %></li>
+<%  }) %>
+</ul>
+<% } %>
+<div class="add-container">
+    <div class="add-card">
+        <form class="add-form" name="add-classification-form" action="/inv/add-classification" method="post">
+            <label for="classification_name">Classification Name:</label>
+            <input type="text" id="classification_name" name="classification_name" required
+                pattern="^[A-Za-z0-9]+$" title="Please match the requested format."
+            >
+
+            <div><i>＊New classification name cannot contain a space or special character of any kind.</i></div>
+
+            <button type="submit">ADD</button>
+        </form>
+    </div>
+</div>

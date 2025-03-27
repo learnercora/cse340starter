@@ -242,39 +242,50 @@ footer p{
   color: red;
 }
 /* login & register */
-.account-container {
+.account-container, 
+.add-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.account-card {
+.account-card, 
+.add-card {
   background: white;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   width: 320px;
 }
-.account-card form {
+.account-card form,
+.add-card form {
   text-align: left;
 }
-.account-card p {
+.account-card p,
+.add-card p {
   text-align: center;
+  margin-top: 1rem;
+  font-size: 14px;
 }
-.account-form {
+.account-form, 
+.add-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.account-form input {
+.account-form input,
+.add-form input,
+.add-form textarea,
+.add-form select {
   width: 100%;
   padding: 10px;
   border: 1px solid var(--light2-color);
   border-radius: 5px;
   font-size: 16px;
 }
-.account-form button {
+.account-form button,
+.add-form button {
   background: var(--light5-color);
   color: white;
   padding: 10px;
@@ -284,20 +295,19 @@ footer p{
   cursor: pointer;
 }
 
-.account-form button:hover {
+.account-form button:hover,
+.add-form button:hover {
   background: var(--primary-color);
 }
-.account-card p {
-  margin-top: 1rem;
-  font-size: 14px;
-}
-.account-card a {
+.account-card a,
+.add-card a {
   color: var(--light5-color);
   text-decoration: none;
   font-weight: bold;
 }
 
-.account-card a:hover {
+.account-card a:hover,
+.add-card a:hover {
   text-decoration: underline;
 }
 #pswdBtn {
@@ -309,13 +319,22 @@ footer p{
   width: 10em;
   text-align: center;
 }
-input:required:invalid, input:focus:invalid {
+input:required:invalid, input:focus:invalid, 
+textarea:required:invalid, textarea:focus:invalid,
+select:required:invalid, select:focus:invalid {
   background-color: rgb(255, 201, 201);
  }
-input:required:valid {
+input:required:valid,
+textarea:required:valid,
+select:required:valid {
   background-color: rgb(192, 255, 192);
 }
- 
+.buttonStyle {
+  display: list-item;
+  text-decoration: underline;
+  margin: 1em;
+}
+
 
 /* larger screen */
 @media screen and (min-width: 800px) {

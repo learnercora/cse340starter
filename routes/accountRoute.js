@@ -10,7 +10,7 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin));
 //register view
 router.get("/register", utilities.handleErrors(accountController.buildRegister));
 //建立會員 view
-router.post('/register', 
+router.post("/register", 
     regValidate.registationRules(),
     regValidate.checkRegData,
     utilities.handleErrors(accountController.registerAccount)
