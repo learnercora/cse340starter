@@ -303,6 +303,10 @@ footer p{
   font-size: 16px;
   cursor: pointer;
 }
+.edit-form button:disabled {
+  cursor: not-allowed;
+  background: var(--light2-color)
+}
 
 .account-form button:hover,
 .add-form button:hover,
