@@ -243,14 +243,16 @@ footer p{
 }
 /* login & register */
 .account-container, 
-.add-container {
+.add-container,
+.edit-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .account-card, 
-.add-card {
+.add-card,
+.edit-card {
   background: white;
   padding: 2rem;
   border-radius: 10px;
@@ -258,17 +260,20 @@ footer p{
   width: 320px;
 }
 .account-card form,
-.add-card form {
+.add-card form,
+.edit-card form {
   text-align: left;
 }
 .account-card p,
-.add-card p {
+.add-card p,
+.edit-card p {
   text-align: center;
   margin-top: 1rem;
   font-size: 14px;
 }
 .account-form, 
-.add-form {
+.add-form,
+.edit-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -277,7 +282,10 @@ footer p{
 .account-form input,
 .add-form input,
 .add-form textarea,
-.add-form select {
+.add-form select,
+.edit-form input,
+.edit-form textarea,
+.edit-form select {
   width: 100%;
   padding: 10px;
   border: 1px solid var(--light2-color);
@@ -285,7 +293,8 @@ footer p{
   font-size: 16px;
 }
 .account-form button,
-.add-form button {
+.add-form button,
+.edit-form button {
   background: var(--light5-color);
   color: white;
   padding: 10px;
@@ -296,18 +305,21 @@ footer p{
 }
 
 .account-form button:hover,
-.add-form button:hover {
+.add-form button:hover,
+.edit-form button:hover {
   background: var(--primary-color);
 }
 .account-card a,
-.add-card a {
+.add-card a,
+.edit-card a {
   color: var(--light5-color);
   text-decoration: none;
   font-weight: bold;
 }
 
 .account-card a:hover,
-.add-card a:hover {
+.add-card a:hover,
+.edit-card a:hover {
   text-decoration: underline;
 }
 #pswdBtn {
