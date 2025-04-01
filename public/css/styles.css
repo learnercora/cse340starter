@@ -277,7 +277,8 @@ footer p{
 }
 .account-form, 
 .add-form,
-.edit-form {
+.edit-form,
+.delete-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -289,7 +290,8 @@ footer p{
 .add-form select,
 .edit-form input,
 .edit-form textarea,
-.edit-form select {
+.edit-form select,
+.delete-form input {
   width: 100%;
   padding: 10px;
   border: 1px solid var(--light2-color);
@@ -298,7 +300,8 @@ footer p{
 }
 .account-form button,
 .add-form button,
-.edit-form button {
+.edit-form button,
+.delete-form button {
   background: var(--light5-color);
   color: white;
   padding: 10px;
@@ -314,7 +317,8 @@ footer p{
 
 .account-form button:hover,
 .add-form button:hover,
-.edit-form button:hover {
+.edit-form button:hover,
+.delete-form button:hover {
   background: var(--primary-color);
 }
 .account-card a,
