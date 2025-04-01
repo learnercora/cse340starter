@@ -244,7 +244,8 @@ footer p{
 /* login & register */
 .account-container, 
 .add-container,
-.edit-container {
+.edit-container,
+.delete-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -252,7 +253,8 @@ footer p{
 
 .account-card, 
 .add-card,
-.edit-card {
+.edit-card,
+.delete-card {
   background: white;
   padding: 2rem;
   border-radius: 10px;
@@ -261,12 +263,14 @@ footer p{
 }
 .account-card form,
 .add-card form,
-.edit-card form {
+.edit-card form,
+.delete-card form {
   text-align: left;
 }
 .account-card p,
 .add-card p,
-.edit-card p {
+.edit-card p,
+.delete-card p {
   text-align: center;
   margin-top: 1rem;
   font-size: 14px;
@@ -315,7 +319,8 @@ footer p{
 }
 .account-card a,
 .add-card a,
-.edit-card a {
+.edit-card a,
+.delete-card a {
   color: var(--light5-color);
   text-decoration: none;
   font-weight: bold;
@@ -323,7 +328,8 @@ footer p{
 
 .account-card a:hover,
 .add-card a:hover,
-.edit-card a:hover {
+.edit-card a:hover,
+.delete-card a:hover {
   text-decoration: underline;
 }
 #pswdBtn {

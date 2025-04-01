@@ -69,6 +69,7 @@ invCont.addClassification = async function (req, res) {
 
   const addResult = await invModel.addClassification(classification_name)
   let nav = await utilities.getNav()
+  const classificationSelect = await utilities.buildClassificationList()
 
   if (addResult) {
     req.flash(
@@ -78,14 +79,16 @@ invCont.addClassification = async function (req, res) {
     res.status(201).render("inventory/management", {
       title: "Management",
       nav,
-      errors: null
+      errors: null,
+      classificationSelect
     })
   } else {
     req.flash("notice", "Sorry, adding classification failed.")
     res.status(501).render("inventory/management", {
       title: "Management",
       nav,
-      errors: null
+      errors: null,
+      classificationSelect
     })
   }
 }
@@ -109,7 +112,8 @@ invCont.buildAddInventory = async function(req, res, next) {
 invCont.addInventory = async function (req, res) {
   let nav = await utilities.getNav()
   const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body
-  
+  const classificationSelect = await utilities.buildClassificationList()
+
   const addResult = await invModel.addInventory(
     inv_make, 
     inv_model, 
@@ -131,14 +135,16 @@ invCont.addInventory = async function (req, res) {
     res.status(201).render("inventory/management", {
       title: "Management",
       nav,
-      errors: null
+      errors: null,
+      classificationSelect
     })
   } else {
     req.flash("notice", "Sorry, adding inventory failed.")
     res.status(501).render("inventory/management", {
       title: "Management",
       nav,
-      errors: null
+      errors: null,
+      classificationSelect
     })
   }
 }
