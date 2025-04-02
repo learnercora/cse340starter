@@ -176,7 +176,11 @@ async function updateAccount(req, res, next) {
 
     // 重新簽發新的 JWT
     const newAccessToken = jwt.sign(updateResult, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
-    res.cookie("jwt", newAccessToken, { httpOnly: true, maxAge: 3600 * 1000 })
+    if(process.env.NODE_ENV === 'development') {
+      res.cookie("jwt", newAccessToken, { httpOnly: true, maxAge: 3600 * 1000 })
+    } else {
+      res.cookie("jwt", newAccessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
+    }
 
     req.flash("notice", `The ${updateResult.account_firstname} was successfully updated.`)
     res.redirect("/account/")
