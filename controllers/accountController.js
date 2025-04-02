@@ -134,7 +134,25 @@ async function accountLogout(req, res, next) {
   res.redirect("/")
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildManagement, accountLogout }
+/* ***************************
+ *  Build edit account view
+ * ************************** */
+async function buildEditAccount(req, res, next) {
+  let nav = await utilities.getNav()
+  const accountData = res.locals.accountData
+  res.render("./account/edit-account", {
+    title: "Edit Account",
+    nav,
+    errors: null,
+    account_firstname: accountData.account_firstname,
+    account_lastname: accountData.account_lastname,
+    account_email: accountData.account_email,
+    account_id: accountData.account_id,
+  })
+}
+
+module.exports = { buildLogin, buildRegister, registerAccount, 
+  accountLogin, buildManagement, accountLogout, buildEditAccount }
 
 // NOTE: 
 // res.render(view, data) 的結構

@@ -38,4 +38,10 @@ router.post(
 
 router.get("/logout", accountController.accountLogout)
 
+// edit account view
+router.get(
+  "/update/:account_id",
+  utilities.handleErrors(accountController.buildEditAccount)
+)
+
 module.exports = router;
