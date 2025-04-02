@@ -127,7 +127,14 @@ async function buildManagement(req, res, next) {
   })
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildManagement }
+async function accountLogout(req, res, next) {
+  let nav = await utilities.getNav()
+  req.flash("notice", "Bye Bye~~~~")
+  res.clearCookie("jwt")
+  res.redirect("/")
+}
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildManagement, accountLogout }
 
 // NOTE: 
 // res.render(view, data) 的結構
