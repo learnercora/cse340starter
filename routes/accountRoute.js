@@ -3,7 +3,7 @@ const express = require("express")
 const router = new express.Router() 
 const accountController = require("../controllers/accountController")
 const utilities = require("../utilities/")
-const regValidate = require('../utilities/account-validation')
+const accValidate = require('../utilities/account-validation')
 
 // login view
 router.get("/login", utilities.handleErrors(accountController.buildLogin));
@@ -11,15 +11,15 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin));
 router.get("/register", utilities.handleErrors(accountController.buildRegister));
 //建立會員 view
 router.post("/register", 
-    regValidate.registationRules(),
-    regValidate.checkRegData,
+    accValidate.registationRules(),
+    accValidate.checkRegData,
     utilities.handleErrors(accountController.registerAccount)
 )
 // Process the login attempt
 router.post(
     "/login",
-    regValidate.loginRules(),
-    regValidate.checkLoginData,
+    accValidate.loginRules(),
+    accValidate.checkLoginData,
     utilities.handleErrors(accountController.accountLogin)
 )
 
@@ -41,7 +41,20 @@ router.get("/logout", accountController.accountLogout)
 // edit account view
 router.get(
   "/update/:account_id",
+  utilities.checkLogin,
   utilities.handleErrors(accountController.buildEditAccount)
+)
+router.post("/update/", 
+  utilities.checkLogin, 
+  accValidate.accountRules(),
+  accValidate.checkAccountData,
+  utilities.handleErrors(accountController.updateAccount)
+)
+router.post("/update-password", 
+  utilities.checkLogin, 
+  accValidate.passwordRules(),
+  accValidate.checkPasswordData,
+  utilities.handleErrors(accountController.updatePassword)
 )
 
 module.exports = router;

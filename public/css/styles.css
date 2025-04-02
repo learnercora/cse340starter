@@ -19,6 +19,9 @@ a {
   text-decoration: none;
   color: var(--secondary-color);
 }
+a:hover {
+  text-decoration: underline;
+}
 /******* Change Box Model ***************/
 *,
 *:before,
@@ -396,6 +399,10 @@ select:required:valid {
 #classificationList {
   padding: 3px 5px;
   border-radius: 5px;
+}
+/*  */
+.margin-left-12px {
+  margin-left: 12px;
 }
 
 /* larger screen */

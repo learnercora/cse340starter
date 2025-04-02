@@ -102,7 +102,7 @@ async function accountLogin(req, res) {
       } else {
         res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
       }
-      return res.redirect("/account/")
+      res.redirect("/account/")
     }
     else {
       req.flash("message notice", "Please check your credentials and try again.")
@@ -128,7 +128,6 @@ async function buildManagement(req, res, next) {
 }
 
 async function accountLogout(req, res, next) {
-  let nav = await utilities.getNav()
   req.flash("notice", "Bye Bye~~~~")
   res.clearCookie("jwt")
   res.redirect("/")
@@ -139,7 +138,8 @@ async function accountLogout(req, res, next) {
  * ************************** */
 async function buildEditAccount(req, res, next) {
   let nav = await utilities.getNav()
-  const accountData = res.locals.accountData
+  const account_id = req.params.account_id
+  const accountData = await accountModel.getAccountById(account_id)
   res.render("./account/edit-account", {
     title: "Edit Account",
     nav,
@@ -151,8 +151,95 @@ async function buildEditAccount(req, res, next) {
   })
 }
 
+/* ***************************
+ *  Update Account Data
+ * ************************** */
+async function updateAccount(req, res, next) {
+  let nav = await utilities.getNav()
+  const {
+    account_id,
+    account_firstname,
+    account_lastname,
+    account_email
+  } = req.body
+
+  const updateResult = await accountModel.updateAccount(
+    account_id,
+    account_firstname,
+    account_lastname,
+    account_email
+  )
+
+  if (updateResult) {
+    delete updateResult.account_password
+    res.locals.accountData = updateResult
+
+    // 重新簽發新的 JWT
+    const newAccessToken = jwt.sign(updateResult, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
+    res.cookie("jwt", newAccessToken, { httpOnly: true, maxAge: 3600 * 1000 })
+
+    req.flash("notice", `The ${updateResult.account_firstname} was successfully updated.`)
+    res.redirect("/account/")
+  } else {
+    req.flash("notice", "Sorry, the update failed.")
+    res.status(501).render("account/edit-account", {
+      title: "Edit Account",
+      nav,
+      errors: null,
+      account_id,
+      account_firstname,
+      account_lastname,
+      account_email
+    })
+  }
+}
+
+/* ****************************************
+*  Update Password Data
+* *************************************** */
+async function updatePassword(req, res) {
+  let nav = await utilities.getNav()
+  const { account_id, account_password } = req.body
+
+  // Hash the password before storing
+  let hashedPassword
+  try {
+    // regular password and cost (salt is generated automatically)
+    hashedPassword = await bcrypt.hashSync(account_password, 10)
+  } catch (error) {
+    req.flash("notice", 'Sorry, there was an error processing the updating.')
+    res.status(500).render("account/edit-account", {
+      title: "Edit Account",
+      nav,
+      errors: null,
+    })
+  }
+
+  const regResult = await accountModel.updatePassword(
+    account_id,
+    hashedPassword //account_password
+  )
+
+  if (regResult) {
+    req.flash(
+      "notice",
+      `Congratulations, you\'re updated password. Please log in.`
+    )
+    res.redirect("/account/login")
+  } else {
+    req.flash("notice", "Sorry, the password update failed.")
+    res.status(501).render("account/edit-account", {
+      title: "Edit Account",
+      nav,
+      errors: null
+    })
+  }
+}
+
+
 module.exports = { buildLogin, buildRegister, registerAccount, 
-  accountLogin, buildManagement, accountLogout, buildEditAccount }
+  accountLogin, buildManagement, accountLogout, 
+  buildEditAccount, updateAccount, updatePassword }
 
 // NOTE: 
 // res.render(view, data) 的結構
