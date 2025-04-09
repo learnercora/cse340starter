@@ -9,7 +9,7 @@ const invCont = {}
 invCont.buildByClassificationId = async function (req, res, next) {
   const classification_id = req.params.classificationId
   const data = await invModel.getInventoryByClassificationId(classification_id)
-  const grid = await utilities.buildClassificationGrid(data)
+  const grid = await utilities.buildGrid(data)
   let nav = await utilities.getNav()
   const className = data?data[0].classification_name:null
   res.render("./inventory/classification", {
@@ -303,6 +303,101 @@ invCont.deleteInventory = async function (req, res, next) {
     })
   }
 }
+
+/* ***************************
+ *  Build search inventory view
+ * ************************** */
+invCont.buildSearchInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  let classificationList = await utilities.buildClassificationList(null, false)
+  res.render("./inventory/search-inventory", {
+    title: "Search Vehicles",
+    nav,
+    errors: null,
+    classificationList
+  })
+}
+
+/* ***************************
+ *  Search Inventory Data
+ * ************************** */
+invCont.searchInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  let {
+    classification_id,
+    inv_price_min,
+    inv_price_max,
+    inv_year_min,
+    inv_year_max,
+    inv_miles_min,
+    inv_miles_max,
+  } = req.body
+
+  classification_id = parseInt(classification_id) || null
+  inv_price_min = parseFloat(inv_price_min) || null
+  inv_price_max = parseFloat(inv_price_max) || null
+  inv_year_min = parseInt(inv_year_min) || null
+  inv_year_max = parseInt(inv_year_max) || null
+  inv_miles_min = parseInt(inv_miles_min) || null
+  inv_miles_max = parseInt(inv_miles_max) || null
+
+  const searchResult = await invModel.searchInventory(
+      classification_id,
+      inv_price_min,
+      inv_price_max,
+      inv_year_min,
+      inv_year_max,
+      inv_miles_min,
+      inv_miles_max
+  )
+
+  if (searchResult&&searchResult.rows) {
+    if(searchResult.rows.length>0){
+      req.flash("notice", `Search successfully.`)
+      const grid = await utilities.buildGrid(searchResult.rows)
+      let nav = await utilities.getNav()
+      res.render("./inventory/classification", {
+        title: "Search vehicles",
+        nav,
+        grid,
+      })
+    }else{
+      req.flash("notice", "Sorry, no data.")
+      const classificationSelect = await utilities.buildClassificationList(classification_id, false)
+      res.status(501).render("inventory/search-inventory", {
+        title: "Search Vehicles",
+        nav,
+        classificationList: classificationSelect,
+        errors: null,
+        inv_price_min,
+        inv_price_max,
+        inv_year_min,
+        inv_year_max,
+        inv_miles_min,
+        inv_miles_max,
+        classification_id
+      })
+    }
+    
+  } else {
+    const classificationSelect = await utilities.buildClassificationList(classification_id, false)
+    req.flash("notice", "Sorry, search failed.")
+    res.status(501).render("inventory/search-inventory", {
+      title: "Search Vehicles",
+      nav,
+      classificationList: classificationSelect,
+      errors: null,
+      inv_price_min,
+      inv_price_max,
+      inv_year_min,
+      inv_year_max,
+      inv_miles_min,
+      inv_miles_max,
+      classification_id
+    })
+  }
+}
+
 
 module.exports = invCont
 

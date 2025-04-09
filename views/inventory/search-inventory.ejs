@@ -1,0 +1,46 @@
+<h1><%= title %></h1>
+<%- messages() %>
+<% if (errors) { %>
+<ul class="notice">
+<% errors.array().forEach(error => { %>
+    <li><%= error.msg %></li>
+<%  }) %>
+</ul>
+<% } %>
+<div class="search-container">
+    <div class="search-card">
+        <form id="searchInvForm" class="search-form" name="search-inventory-form" action="/inv/search" method="post">
+
+            <label for="classificationList">Classification</label>
+            <%- classificationList %>
+          
+            <label>Price (Range)</label>
+            <div class="range-group">
+                <input type="number" name="inv_price_min" value="<%= locals.inv_price_min %>" placeholder="Min" min="0" step="0.01">
+                <span>~</span>
+                <input type="number" name="inv_price_max" value="<%= locals.inv_price_max %>" placeholder="Max" min="1" step="0.01">
+            
+            </div>
+            
+            <label>Year (Range)</label>
+            <div class="range-group">
+                <input type="number" name="inv_year_min" value="<%= locals.inv_year_min %>" placeholder="Min Year" min="1900" max="2099">
+                <span>~</span>
+                <input type="number" name="inv_year_max" value="<%= locals.inv_year_max %>" placeholder="Max Year" min="1900" max="2099">
+            </div>
+
+            <label>Miles (Range)</label>
+            <div class="range-group">
+                <input type="number" name="inv_miles_min" value="<%= locals.inv_miles_min %>" placeholder="Min Miles" min="0" step="1">
+                <span>~</span>
+                <input type="number" name="inv_miles_max" value="<%= locals.inv_miles_max %>" placeholder="Max Miles" min="0" step="1">    
+            </div>
+
+            <button type="submit" disabled>SEARCH</button>
+          </form>
+    </div>
+</div>
+
+
+
+<script src="../../js/inv-search.js"></script>

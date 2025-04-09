@@ -29,7 +29,7 @@ Util.getNav = async function (req, res, next) {
 /* **************************************
 * Build the classification view HTML
 * ************************************ */
-Util.buildClassificationGrid = async function(data){
+Util.buildGrid = async function(data){
     let grid
     if(data.length > 0){
       grid = '<ul id="inv-display">'
@@ -93,10 +93,10 @@ Util.buildInventoryDetailGrid = async function(data){
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
 
 
-Util.buildClassificationList = async function (classification_id = null) {
+Util.buildClassificationList = async function (classification_id = null, ifRequired = true) {
   let data = await invModel.getClassifications()
   let classificationList =
-    '<select name="classification_id" id="classificationList" required>'
+    `<select name="classification_id" id="classificationList" ${ifRequired?"required":""}>`
   classificationList += "<option value=''>Choose a Classification</option>"
   data.rows.forEach((row) => {
     classificationList += '<option value="' + row.classification_id + '"'

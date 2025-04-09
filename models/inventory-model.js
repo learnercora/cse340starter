@@ -136,6 +136,36 @@ async function deleteInventory(inv_id) {
   }
 }
 
+/* *****************************
+*   Search inventory
+* *************************** */
+async function searchInventory(
+  classification_id,
+  inv_price_min,
+  inv_price_max,
+  inv_year_min,
+  inv_year_max,
+  inv_miles_min,
+  inv_miles_max,
+){
+  try {
+    const sql = "SELECT * FROM public.inventory WHERE ($1::int IS NULL OR classification_id = $1) AND ($2::numeric IS NULL OR inv_price >= $2) AND ($3::numeric IS NULL OR inv_price <= $3) AND ($4::int IS NULL OR inv_year::int >= $4) AND ($5::int IS NULL OR inv_year::int <= $5) AND ($6::int IS NULL OR inv_miles >= $6) AND ($7::int IS NULL OR inv_miles <= $7) "
+    const result = await pool.query(sql, [
+      classification_id,
+      inv_price_min,
+      inv_price_max,
+      inv_year_min,
+      inv_year_max,
+      inv_miles_min,
+      inv_miles_max,
+    ]);
+    return result;
+  } catch (error) {
+    return error.message
+  }
+}
+
 
 module.exports = { getClassifications, getInventoryByClassificationId, getInventoryDetailByInventoryId, 
-  addClassification, addInventory, checkExistingClassificationName, updateInventory, deleteInventory }
+  addClassification, addInventory, checkExistingClassificationName, updateInventory, deleteInventory,
+  searchInventory }

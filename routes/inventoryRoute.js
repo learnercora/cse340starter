@@ -43,6 +43,10 @@ router.post("/update/",
 router.get("/delete/:inventory_id", utilities.checkAccountType, utilities.handleErrors(invController.buildDeleteInventory));
 router.post("/delete/", utilities.checkAccountType, utilities.handleErrors(invController.deleteInventory))
 
-
+//search inventory
+router.get("/search", utilities.handleErrors(invController.buildSearchInventory));
+router.post("/search", 
+    utilities.handleErrors(invController.searchInventory)
+)
 
 module.exports = router;

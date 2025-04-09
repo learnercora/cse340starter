@@ -248,7 +248,8 @@ footer p{
 .account-container, 
 .add-container,
 .edit-container,
-.delete-container {
+.delete-container,
+.search-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -257,7 +258,8 @@ footer p{
 .account-card, 
 .add-card,
 .edit-card,
-.delete-card {
+.delete-card,
+.search-card {
   background: white;
   padding: 2rem;
   border-radius: 10px;
@@ -267,13 +269,15 @@ footer p{
 .account-card form,
 .add-card form,
 .edit-card form,
-.delete-card form {
+.delete-card form,
+.search-card form {
   text-align: left;
 }
 .account-card p,
 .add-card p,
 .edit-card p,
-.delete-card p {
+.delete-card p,
+.search-card p {
   text-align: center;
   margin-top: 1rem;
   font-size: 14px;
@@ -281,7 +285,8 @@ footer p{
 .account-form, 
 .add-form,
 .edit-form,
-.delete-form {
+.delete-form,
+.search-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -294,7 +299,9 @@ footer p{
 .edit-form input,
 .edit-form textarea,
 .edit-form select,
-.delete-form input {
+.delete-form input,
+.search-form select,
+.search-form input {
   width: 100%;
   padding: 10px;
   border: 1px solid var(--light2-color);
@@ -304,7 +311,8 @@ footer p{
 .account-form button,
 .add-form button,
 .edit-form button,
-.delete-form button {
+.delete-form button,
+.search-form button {
   background: var(--light5-color);
   color: white;
   padding: 10px;
@@ -313,7 +321,8 @@ footer p{
   font-size: 16px;
   cursor: pointer;
 }
-.edit-form button:disabled {
+.edit-form button:disabled,
+.search-form button:disabled {
   cursor: not-allowed;
   background: var(--light2-color)
 }
@@ -321,13 +330,15 @@ footer p{
 .account-form button:hover,
 .add-form button:hover,
 .edit-form button:hover,
-.delete-form button:hover {
+.delete-form button:hover,
+.search-form button:hover {
   background: var(--primary-color);
 }
 .account-card a,
 .add-card a,
 .edit-card a,
-.delete-card a {
+.delete-card a,
+.search-card a {
   color: var(--light5-color);
   text-decoration: none;
   font-weight: bold;
@@ -336,8 +347,24 @@ footer p{
 .account-card a:hover,
 .add-card a:hover,
 .edit-card a:hover,
-.delete-card a:hover {
+.delete-card a:hover
+.search-card a:hover {
   text-decoration: underline;
+}
+.range-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.range-group input {
+  width: 100%;
+  flex: 1;
+}
+
+.range-group span {
+  margin: 0 4px;
+  font-weight: bold;
 }
 #pswdBtn {
   border: 2px solid #000;
@@ -397,13 +424,16 @@ select:required:valid {
   text-decoration: underline;
 }
 #classificationList {
-  padding: 3px 5px;
+  padding: 10px;
   border-radius: 5px;
 }
 /*  */
 .margin-left-12px {
   margin-left: 12px;
 }
+
+
+
 
 /* larger screen */
 @media screen and (min-width: 800px) {
